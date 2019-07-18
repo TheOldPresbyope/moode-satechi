@@ -38,7 +38,6 @@ This rule tells `udev` what to do when the virtual Linux input device representi
 git clone https://github.com/theoldpresbyope/moode-satechi.git
 cd moode-satechi
 ```
-
 1. As superuser, copy the file `etc/udev/rules.d/42-satechi.rules` to `/etc/udev/rules.d/42-satechi.rules`
 It should have permissions 644 (-rw-r--r--).
 
