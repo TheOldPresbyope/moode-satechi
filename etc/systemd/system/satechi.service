@@ -1,0 +1,6 @@
+[Unit]
+Description=Satechi Remote service
+BindsTo=dev-SBMMR.device
+
+[Service]
+ExecStart=/usr/local/bin/satechi.py

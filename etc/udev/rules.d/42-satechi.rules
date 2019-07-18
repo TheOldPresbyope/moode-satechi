@@ -1,0 +1,1 @@
+ACTION=="add", KERNEL=="event*", SUBSYSTEM=="input", ATTRS{name}=="Bluetooth Media Control & Camera Shutter Click Consumer Control", SYMLINK+="SBMMR",TAG+="systemd",ENV{SYSTEMD_WANTS}+="satechi.service"
