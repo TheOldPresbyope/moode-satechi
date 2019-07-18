@@ -20,7 +20,7 @@ Note: Once paired, the Satechi will show up on the moOde Bluez Config screen as 
 
 ## Components
 
-1. `/dev/udev/rules.42-satechi.rules`
+1. `/etc/udev/rules.42-satechi.rules`
 This rule tells `udev` what to do when the virtual Linux input device representing the Satechi Remote is detected. It tells `udev` to create a symlink `/dev/SBMMR` for convenience and to invoke a `systemd` service. The symlink is removed when the remote goes to sleep or is powered off and the input device is removed. (Why the number 42? Ask any reader of Douglas Adam's **Hitchhiker's Guide to the Galaxy.**)
 
 2. `/etc/systemd/system/satechi.service` This tells `systemd` to start the actual satechi script after `udev` detects the remote and creates the symlink and to stop it when the symlink is removed.
@@ -28,6 +28,8 @@ This rule tells `udev` what to do when the virtual Linux input device representi
 3. `/usr/local/bin/satechi.py` This is the actual script which endlessly loops waiting for appropriate events and calls either mpc or moOde utility script(s) to carry out commands. It is started and stopped by `systemd`.
 
 ## Installation:
+
+### The hardcore way
 
 1. Install the Python evdev package `sudo apt-get install python3-evdev`
 
@@ -44,12 +46,21 @@ It should have permissions 755 (-rwxr-xr-x).
 
 6. Turn on the Satechi Remote and click a button.
 
+### The easy way
+
+1. clone the repo on your RPi and cd into it
+```
+git clone https://github.com/theoldpresbyope/moode-satechi.git
+cd moode-satechi
+```
+
+2. check that install-satech.sh is executable and invoke it `./install-satech.sh`
+
 ## Notes
+
 
 - It may take 2s-5s for moOde to become responsive to its commands after the remote is turned on or waked up by a button press once it's gone to sleep after a period of inactivity. Button presses will be ignored during this initial deadband, which can be disconcerting to an impatient user.
 
 - If one wanted to use a different make/model of Bluetooth remote, one would have to determine the keycodes being output and adjust the mappings in the Python script accordingly. (With luck, all multi-media remotes emit the same basic set of keycodes but you never know.) As well, one would have to determine the specifics of the new remote's virtual-input device and adjust the rules file accordingly.
 
 - It is possible to start up the Satechi script without resorting to `systemd`. Files needed to implement this alternative approach can be found in the `planB` subdirectory. From a performance perspective, the two approaches seem equivalent. The `systemd` approach, however, is in line with the modern Tao of Linux.
-
-Postscript: By default, bluetoothctl requires the entry of a PIN from the Satechi remote during pairing. Handily, the Satechi has a pull-down cover revealing a miniature number keypad for doing exactly that! I seem to recall there's a way to bypass this challenge-response scheme---it may even have been discussed in another thread last year---but I didn't try.
