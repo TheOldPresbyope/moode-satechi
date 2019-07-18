@@ -33,23 +33,24 @@ This rule tells `udev` what to do when the virtual Linux input device representi
 
 1. Install the Python evdev package `sudo apt-get install python3-evdev`
 
-1. clone the repo on your RPi and cd into it
+2. clone the repo on your RPi and cd into it
 ```
 git clone https://github.com/theoldpresbyope/moode-satechi.git
 cd moode-satechi
 ```
-1. As superuser, copy the file `etc/udev/rules.d/42-satechi.rules` to `/etc/udev/rules.d/42-satechi.rules`
+
+3. As superuser, copy the file `etc/udev/rules.d/42-satechi.rules` to `/etc/udev/rules.d/42-satechi.rules`
 It should have permissions 644 (-rw-r--r--).
 
-1. As superuser, copy the file `etc/systemd/system/satechi.service` to `/etc/systemd/system/satechi.service`
+4. As superuser, copy the file `etc/systemd/system/satechi.service` to `/etc/systemd/system/satechi.service`
 It should have permissions 644 (-rw-r--r--).
 
-1. As superuser, copy the file `usr/local/bin/satechi.py` to `/usr/local/bin/satechi.py`
+5. As superuser, copy the file `usr/local/bin/satechi.py` to `/usr/local/bin/satechi.py`
 It should have permissions 755 (-rwxr-xr-x).
 
-1. Reboot
+6. Reboot
 
-1. Turn on the Satechi Remote if it isn't already and click a button.
+7. Turn on the Satechi Remote if it isn't already and click a button.
 
 ### The easy way
 
