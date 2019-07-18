@@ -20,7 +20,7 @@ Note: Once paired, the Satechi will show up on the moOde Bluez Config screen as 
 
 ## Components
 
-1. `/etc/udev/rules.42-satechi.rules`
+1. `/etc/udev/rules.d/42-satechi.rules`
 This rule tells `udev` what to do when the virtual Linux input device representing the Satechi Remote is detected. It tells `udev` to create a symlink `/dev/SBMMR` for convenience and to invoke a `systemd` service. The symlink is removed when the remote goes to sleep or is powered off and the virtual input device is removed. (Why the number 42? Ask any reader of Douglas Adam's **Hitchhiker's Guide to the Galaxy.**)
 
 2. `/etc/systemd/system/satechi.service` This tells `systemd` to start the actual satechi script after `udev` detects the remote and creates the symlink and to stop it when the symlink is removed.
@@ -31,11 +31,11 @@ This rule tells `udev` what to do when the virtual Linux input device representi
 
 ### The hardcore way
 
-1. Install the Python evdev package `sudo apt-get install python3-evdev`
+1. Install the Python evdev package `sudo apt-get install -y python3-evdev`
 
 2. clone the repo on your RPi and cd into it
 ```
-git clone https://github.com/theoldpresbyope/moode-satechi.git
+git clone https://github.com/TheOldPresbyope/moode-satechi.git
 cd moode-satechi
 ```
 
@@ -56,11 +56,11 @@ It should have permissions 755 (-rwxr-xr-x).
 
 1. clone the repo on your RPi and cd into it
 ```
-git clone https://github.com/theoldpresbyope/moode-satechi.git
+git clone https://github.com/TheOldPresbyope/moode-satechi.git
 cd moode-satechi
 ```
 
-2. check that install-satechi.sh is executable and invoke it `./install-satechi.sh`
+2. check that `install-satechi.sh` is executable and invoke it `./install-satechi.sh`
 
 3. Turn on the Satechi Remote if it isn't already and click a button.
 
