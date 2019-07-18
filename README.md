@@ -14,7 +14,7 @@ There are eight buttons on the device which the script maps to the following moO
 
 - moOde with Bluetooth controller present and enabled. This project was developed in moOde 5.4beta2 on an RPi3B+ with its onboard controller.
 
-- The Satechi remote paired with, connected to, and trusted by the moOde Bluetooth subsystem. See [Configuring the Satechi connection]() This need be done only once unless/until the moOde BT controller is reset. The result is preserved across reboots.
+- The Satechi remote paired with, connected to, and trusted by the moOde Bluetooth subsystem. See [Configuring the Satechi connection](ConfigureSatechiConnection.md) This need be done only once unless/until the moOde BT controller is reset. The result is preserved across reboots.
 
 Note: Once paired, the Satechi will show up on the moOde Bluez Config screen as "Bluetooth Media Control & Camera Shutter Click". Ignore this. Obviously, it is not an audio device. Do not attempt to connect via this screen.</aside>
 
