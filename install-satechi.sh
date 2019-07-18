@@ -6,13 +6,16 @@
 read -p "Install Satechi support (y/n)? " answer
 case ${answer:0:1} in
 y|Y )
-	echo "proceeding"	
+	echo "proceeding"
 ;;
 * )
 	echo "exiting";
 	exit 1
 ;;
 esac
+
+# install required package
+sudo apt-get install -y python3-evdev
 
 # copy files into final destination
 sudo cp etc/udev/rules.d/42-satechi.rules /etc/udev/rules.d/42-satechi.rules
@@ -35,4 +38,3 @@ y|Y )
         exit 1
 ;;
 esac
-
