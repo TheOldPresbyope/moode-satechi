@@ -21,7 +21,7 @@ Note: Once paired, the Satechi will show up on the moOde Bluez Config screen as 
 ## Components
 
 1. `/etc/udev/rules.42-satechi.rules`
-This rule tells `udev` what to do when the virtual Linux input device representing the Satechi Remote is detected. It tells `udev` to create a symlink `/dev/SBMMR` for convenience and to invoke a `systemd` service. The symlink is removed when the remote goes to sleep or is powered off and the input device is removed. (Why the number 42? Ask any reader of Douglas Adam's **Hitchhiker's Guide to the Galaxy.**)
+This rule tells `udev` what to do when the virtual Linux input device representing the Satechi Remote is detected. It tells `udev` to create a symlink `/dev/SBMMR` for convenience and to invoke a `systemd` service. The symlink is removed when the remote goes to sleep or is powered off and the virtual input device is removed. (Why the number 42? Ask any reader of Douglas Adam's **Hitchhiker's Guide to the Galaxy.**)
 
 2. `/etc/systemd/system/satechi.service` This tells `systemd` to start the actual satechi script after `udev` detects the remote and creates the symlink and to stop it when the symlink is removed.
 
@@ -33,18 +33,24 @@ This rule tells `udev` what to do when the virtual Linux input device representi
 
 1. Install the Python evdev package `sudo apt-get install python3-evdev`
 
-2. As superuser, copy the file `42-satechi.rules` to `/etc/udev/rules.d/42-satechi.rules`
+1. clone the repo on your RPi and cd into it
+```
+git clone https://github.com/theoldpresbyope/moode-satechi.git
+cd moode-satechi
+```
+
+1. As superuser, copy the file `etc/udev/rules.d/42-satechi.rules` to `/etc/udev/rules.d/42-satechi.rules`
 It should have permissions 644 (-rw-r--r--).
 
-3. As superuser, copy the file `satechi.service` to `/etc/systemd/system/satechi.service`
+1. As superuser, copy the file `etc/systemd/system/satechi.service` to `/etc/systemd/system/satechi.service`
 It should have permissions 644 (-rw-r--r--).
 
-4. As superuser, copy the file `satechi.py` to `/user/local/bin/satechi.py`
+1. As superuser, copy the file `usr/local/bin/satechi.py` to `/usr/local/bin/satechi.py`
 It should have permissions 755 (-rwxr-xr-x).
 
-5. Reboot
+1. Reboot
 
-6. Turn on the Satechi Remote and click a button.
+1. Turn on the Satechi Remote and click a button.
 
 ### The easy way
 
@@ -56,6 +62,8 @@ cd moode-satechi
 
 2. check that install-satech.sh is executable and invoke it `./install-satech.sh`
 
+3. Turn on the Satechi Remote and click a button.
+
 ## Notes
 
 
@@ -63,4 +71,4 @@ cd moode-satechi
 
 - If one wanted to use a different make/model of Bluetooth remote, one would have to determine the keycodes being output and adjust the mappings in the Python script accordingly. (With luck, all multi-media remotes emit the same basic set of keycodes but you never know.) As well, one would have to determine the specifics of the new remote's virtual-input device and adjust the rules file accordingly.
 
-- It is possible to start up the Satechi script without resorting to `systemd`. Files needed to implement this alternative approach can be found in the `planB` subdirectory. From a performance perspective, the two approaches seem equivalent. The `systemd` approach, however, is in line with the modern Tao of Linux.
+- It is possible to start up the Satechi script without resorting to `systemd`. Files needed to implement this alternative approach can be found in the `planB` subdirectory. From a performance perspective, the two approaches seem equivalent. The `systemd` approach, however, is in line with the Tao of modern Linux.
