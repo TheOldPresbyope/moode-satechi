@@ -16,18 +16,14 @@ import sys,evdev,subprocess,time
 # - A companion udev rule is triggered when the Satechi is awakened by a
 #     button press and the signal is detected by moOde's BT controller;
 #     the rule creates a symlink /dev/SBMMR for convenience and
-#     invokes a companion helper script which in turn starts this  script 
+#     alerts systemd which starts this script in turn.
 # - When the Satechi goes back to sleep after a period of inactivity, udev
-#     removes the symlink and this script dies (error ends, actually) when 
-#     it can no longer find it.
-# - The indirect methon used to invoke this Python script allows it to 
-#      run forever as long as the Satechi is awake, or until the
-#      script is killed either by the root user or by rebooting. 
+#     removes the symlink and systemd kills this script
+# - This script runs forever until killed by systemd, by an explicit act by root, 
+#     or by a reboot
 # NOTE: it seems to take some seconds after an initial button-press before 
 #         all the machinery is working and moOde starts responding. 
-#         Not sure why. Sadly, the first press or two is lost in the shuffle. 
-#         Maybe there's a fix, maybe not.  
-# Revision 1: change object-instance name to satechi for clarity
+#         The first press or more is lost in the warmup. 
 
 try:  
     satechi=evdev.InputDevice('/dev/SBMMR')
