@@ -2,17 +2,17 @@
 
 This alternative approach takes advantage of the udev verb `RUN` to run a userspace command, obviating the need for `systemd` to get involved.
 
-There is a fly in the ointment with this approach. The userspace command (and any of its child processes) will be terminated if still running when `udev` finishes. The trick used here is to let `udev` run a startup shell script which in turn invokes the actual Python script. Using the `at now` construction in this intermediary startup shell script allows the invoked Python script to continue running after udev finishes and kills the startup script.
+There is a fly in the ointment with this approach. The userspace command (and any of its child processes) will be terminated if still running when `udev` finishes. The trick used here is to let `udev` run a startup shell script which in turn invokes the actual Python script. Using the `at now` construction in this intermediary startup shell script allows the invoked Python script to continue running after `udev` finishes and kills the startup script.
 
 The two approaches can't live side-by-side. Install one or the other.
 
 ## Prerequisites
 
-The list is the same as in the primary approach. See [the primary README.](../README.md)
+The list is the same as in the primary approach. See the primary [README.](../README.md)
 
 ## Components
 
-1. `/etc/udev/rules.d/42-satechi.rules` This replaces the same-named rule for the primary approach. It differs in that, instead of invoking `systemd` when the Satechi Remote is detected, it uses `RUN` to invoke the startup shell script.
+1. `/etc/udev/rules.d/42-satechi.rules` This replaces the same-named rule used in the primary approach. It differs in that, instead of triggering `systemd` when the Satechi Remote is detected, it uses `RUN` to invoke the startup shell script.
 
 2. `/usr/local/bin/satechi.sh` This is the startup shell script, whose sole purpose is to invoke the actual Python script. This script does not exist in the primary approach. Using the `at now` construction here is the trick which makes the alternative approach work.
 
@@ -22,7 +22,7 @@ The list is the same as in the primary approach. See [the primary README.](../RE
 
 Look sharp. These steps are similar to but not the same as those in the primary approach. No install script is available.
 
-1. Install both the python3 evdev package and the Raspbian do package `sudo apt-get install -y python3-evdev at`
+1. Install both the python3 evdev package and the at package `sudo apt-get install -y python3-evdev at`
 
 2. Clone the repo on your RPi and cd into the planB directory (*not* the top directory)
 ```
