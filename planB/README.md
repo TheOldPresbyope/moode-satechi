@@ -12,7 +12,7 @@ The list is the same as in the primary approach. See [the primary README.](../RE
 
 ## Components
 
-1. `/etc/udev/rules.d/42-satechi.rules` This replaces the same-named rule for the primary approach. Instead of invoking `systemd` when the Satechi Remote is detected, it uses `RUN` to invoke the startup shell script.
+1. `/etc/udev/rules.d/42-satechi.rules` This replaces the same-named rule for the primary approach. It differs in that, instead of invoking `systemd` when the Satechi Remote is detected, it uses `RUN` to invoke the startup shell script.
 
 2. `/usr/local/bin/satechi.sh` This is the startup shell script, whose sole purpose is to invoke the actual Python script. This script does not exist in the primary approach. Using the `at now` construction here is the trick which makes the alternative approach work.
 
