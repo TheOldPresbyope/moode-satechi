@@ -10,7 +10,7 @@ There are eight buttons on the device which the script maps to the following moO
 
 ## Prerequisites:
 
-- Raspbian Buster (for up-to-date Python3 and Python evdev module) This requirement is fulfilled automatically by working with moOde 5.4beta series or above. In principle, one can update the Python3 subsystem on an earlier version of moOde but this effort is not addressed here.
+- A recent version of Python3 and its evdev module. This code works with the version distributed with Raspbian Buster (python3 3.7.3 and python3-evdev 1.1.2) but not with the version distributed with Raspbian Stretch, which means it works with moOde 5.4 beta 2 but not with moOde 5.3.1. In principle, one can update Python3 on Raspbian Stretch but this effort is not addressed here.
 
 - moOde with Bluetooth controller present and enabled. This project was developed in moOde 5.4beta2 on an RPi3B+ with its onboard controller.
 
